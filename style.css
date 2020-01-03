@@ -1,0 +1,40 @@
+body {
+    margin: 0px;
+}
+
+header {
+    padding: 25px;
+    background-color: #00802b;
+}
+
+article.dodatki {
+    margin: 0px;
+    height: 10%;
+    color: rgb(56, 56, 56);
+    font-size: 30px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+article.aplikacje {
+    margin: 0px;
+    color: rgb(56, 56, 56);
+    font-size: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+section.parallax {
+    background-image: url(bg.png);
+    height: 50%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
