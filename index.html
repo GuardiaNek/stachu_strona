@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="text/html">
     <link rel="Stylesheet" href="style.css">
+    <link rel="Stylesheet" href="slider.css">
     <title>Document</title>
 </head>
 <body>
@@ -14,195 +15,94 @@
             <li></li>
         </ul>
     </header>
-    <div class="slider elements-list" id="slider1">
-        <div class="slider-slides-cnt">
-            <article class="element slider-slide">
-                <h2 class="element-title">
-                    1 Lorem ipsum dolor sit.
-                </h2>
-                <div class="element-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit...
-                </div>
-            </article>
-            <article class="element slider-slide">
-                <h2 class="element-title">
-                    2 Lorem ipsum dolor sit.
-                </h2>
-                <div class="element-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit...
-                </div>
-            </article>
+    <div id="slider" class="slides">
+        <div class="slide">
+          <figure>
+            <img class="hidden" src="dodatki.png" alt="Pierwszy slide">
+          </figure>
+          <div class="slide-description">
+            <h3 class="slide-header"><a href="dodatki.html">Kliknij by przejść!</a></h3>
+            <p></p>
+          </div>
         </div>
-        <div class="slider-nav">
-            <button type="button" class="slider-button slider-button-prev">Poprzedni</button>
-            <button type="button" class="slider-button slider-button-next">Następny</button>
+        <div class="slide">
+          <figure>
+            <img class="hidden" src="uploads/images/blog/slide2.jpg" alt="Drugi slide">
+          </figure>
+          <div class="slide-description">
+            <h3 class="slide-header">Animacje CSS3</h3>
+            <p>Dzięki zastosowaniu animacji CSS3 nawet początkujący programista stron internetowych, może bez trudu pisać własne animacje dla pojedynczych slidów.</p>
+          </div>
         </div>
-        <ul class="slider-dots">
-            <li class="slider-dots-element slider-dots-element-active"><button class="slider-dots-button" type="button">1</button></li>
-            <li class="slider-dots-element"><button class="slider-dots-button" type="button">2</button></li>
-        </ul>
-    </div>
-    <script type="text/javascript">
-        const Slider = function(elemSelector, opts) {
-    const defaultOpts = {
-        pauseTime : 0,
-        prevText : "Poprzedni slide",
-        nextText : "Następny slide",
-        generateDots : true,
-        generatePrevNext : true
-    };
-    this.options = Object.assign({}, defaultOpts, opts);
-    this.sliderSelector = elemSelector;
-    this.currentSlide = 0; //aktualny slide
-    this.time = null; //tutaj będziemy podczepiać setTimeout
-    this.slider = null;
-    this.elem = null;
-    this.slides = null;
-
-    this.prev = null; //przycisk prev
-    this.next = null; //przycisk next
-    this.dots = [];
-
-    this.generateSlider();
-    this.changeSlide(this.currentSlide);
-}
-
-Slider.prototype.generateSlider = function() {
-    //pobieramy element który zamienimy na slider
-    this.slider = document.querySelector(this.sliderSelector);
-    this.slider.classList.add('slider');
-
-    //tworzymy kontener dla slajdów
-    const slidesCnt = document.createElement('div');
-    slidesCnt.classList.add('slider-slides-cnt');
-
-    //pobieramy element slajdów
-    this.slides = this.slider.children;
-
-    //to jest żywa kolekcja, więc przy przeniesieniu każdego slajdu
-    //jej długość maleje
-    while (this.slides.length) {
-        this.slides[0].classList.add('slider-slide');
-        slidesCnt.appendChild(this.slides[0]);
-    }
-    this.slides = slidesCnt.querySelectorAll('.slider-slide');
-    this.slider.appendChild(slidesCnt);
-
-    if (this.options.generatePrevNext) this.createPrevNext();
-    if (this.options.generateDots) this.createDots();
-}
-
-Slider.prototype.slidePrev = function() {
-    this.currentSlide--;
-    if (this.currentSlide < 0) {
-        this.currentSlide = this.slides.length - 1;
-    }
-    this.changeSlide(this.currentSlide);
-}
-
-Slider.prototype.slideNext = function() {
-    this.currentSlide++;
-    if (this.currentSlide > this.slides.length - 1) {
-        this.currentSlide = 0;
-    }
-    this.changeSlide(this.currentSlide);
-}
-
-Slider.prototype.changeSlide = function(index) {
-    [].forEach.call(this.slides, function(slide) {
-        slide.classList.remove('slider-slide-active');
-        slide.setAttribute('aria-hidden', true);
-    });
-
-    //dodajemy ją tylko wybranemu
-    this.slides[index].classList.add('slider-slide-active');
-    this.slides[index].setAttribute('aria-hidden', false);
-
-    //podobny manewr robimy dla kropek
-    if (this.options.generateDots) {
-        this.dots.forEach(function(dot) {
-            dot.classList.remove('slider-dots-element-active');
-        });
-        this.dots[index].classList.add('slider-dots-element-active');
-    }
-
-    //aktualny slide przestawiamy na wybrany
-    this.currentSlide = index;
-
-    if (this.options.pauseTime !== 0) {
-        clearInterval(this.time);
-        this.time = setTimeout(function() {
-            this.slideNext();
-        }.bind(this), this.options.pauseTime)
-    }
-}
-
-Slider.prototype.createPrevNext = function() {
-    this.prev = document.createElement('button');
-    this.prev.type = "button";
-    this.prev.innerText = this.options.prevText;
-    this.prev.classList.add('slider-button');
-    this.prev.classList.add('slider-button-prev');
-    this.prev.addEventListener('click', this.slidePrev.bind(this));
-
-    this.next = document.createElement('button');
-    this.next.type = "button";
-    this.next.innerText = this.options.nextText;
-    this.next.classList.add('slider-button');
-    this.next.classList.add('slider-button-next');
-    this.next.addEventListener('click', this.slideNext.bind(this));
-
-    const nav = document.createElement('div');
-    nav.classList.add('slider-nav');
-    nav.setAttribute('aria-label', 'Slider prev next');
-    nav.appendChild(this.prev);
-    nav.appendChild(this.next);
-    this.slider.appendChild(nav);
-}
-
-Slider.prototype.createDots = function() {
-    const ulDots = document.createElement('ul');
-    ulDots.classList.add('slider-dots');
-    ulDots.setAttribute('aria-label', 'Slider pagination');
-
-    //tworzymy pętlę w ilości liczby slajdów
-    for (let i=0; i<this.slides.length; i++) {
-        //każdorazowo tworzymy LI wraz z buttonem
-        //każdy button po kliknięciu zmieni slajd
-        //za pomocą metody changeSlide()
-
-        const li = document.createElement('li');
-        li.classList.add('slider-dots-element');
-
-        const btn = document.createElement('button');
-        btn.classList.add('slider-dots-button');
-        btn.type = "button";
-        btn.innerText = i+1;
-        btn.setAttribute('aria-label', 'Set slide '+(i+1));
-
-        btn.addEventListener('click', function() {
-            this.changeSlide(i);
-        }.bind(this));
-
-        li.appendChild(btn);
-
-        ulDots.appendChild(li);
-        this.dots.push(li);
-    }
-
-    this.slider.appendChild(ulDots);
-}
-    </script>
-    <footer>
-        copyright: xyz
-    </footer>
-</body>
+        <div class="slide">
+          <figure>
+            <img class="hidden" src="uploads/images/blog/slide3.jpg" alt="Trzeci slide">
+          </figure>
+          <div class="slide-description">
+            <h3 class="slide-header">Zatrzymaj po najechaniu</h3>
+            <p>Dzięki opcji "pause" po najechaniu kursorem slide zatrzyma się, co pozwoli podziwiać zdjęcia bądź przeczytać tekst w nim zawarty.</p>
+          </div>
+        </div>
+        <div class="slide">
+          <figure>
+            <img class="hidden" src="uploads/images/blog/slide4.jpg" alt="Czwarty slide">
+          </figure>
+          <div class="slide-description">
+            <h3 class="slide-header">Wywołaj slider w dowolnym momencie</h3>
+            <p>Konstrukcja slidera umożliwia uruchomienie rotacji zdjęć w dowolnym momencie, po wykonaniu akcji czy po wczytaniu się strony.</p>
+          </div>
+        </div>
+        <div class="slide">
+          <figure>
+            <img class="hidden" src="uploads/images/blog/slide5.jpg" alt="Piąty slide">
+          </figure>
+          <div class="slide-description">
+            <h3 class="slide-header">Mam już bibliotekę jQuery, nie chcę Comp!</h3>
+            <p>Jeżeli posiadasz już zainstalowaną bibliotekę jQuery, nie musisz pobierać i instalować biblioteki Comp. Slider został dostosowany do popularnej biblioteki jQuery.</p>
+          </div>
+        </div>
+        <div class="slide">
+          <figure>
+            <img class="hidden" src="uploads/images/blog/slide6.jpg" alt="Szósty slide">
+          </figure>
+          <div class="slide-description">
+            <h3 class="slide-header">Slider RWD</h3>
+            <p>Slider został dostosowany do urządzeń mobilnych.</p>
+          </div>
+        </div>
+        <nav role="pagination" class="dots">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </nav>
+        <nav role="pagination" class="arrows">
+          <button class="arrow-prev">❮</button>
+        </nav>
+        <nav role="pagination" class="arrows">
+          <button class="arrow-next">❯</button>
+        </nav>
+      </div>    
+    <script src="comp.js"></script>
+      <script src="slider.js"></script>
+        <script>
+          (function () {
+            new Slider("#slider .slide").options({
+            prev: "#slider nav button.arrow-prev",
+            next: "#slider nav button.arrow-next",
+            nav: "#slider nav.dots span"
+            }).init();
+            })();
+</script>
+</body>    
 </html>
+        
     
 
         
         
         
-      
     
     
