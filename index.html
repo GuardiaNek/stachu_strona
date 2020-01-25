@@ -110,28 +110,11 @@
           <script>
             (function () {
             new Slider("#slider .slide").options({
-            first: 0, // Pozycja od której rozpocznie się slider
-
-            activeClassName: "active", // Nazwa klasy aktywnego slidu
-            prevClassName: "prev", // Nazwa klasy slidu który był poprzednio aktywny (pomocne przy animacjach CSS)
-            firstClassName: "first", // Nazwa nadawany na pierwszy (first: 0) slide podczas pierwszego uruchomienia
-            loadingClassName: "loading", // Nazwa nadawana na slide oraz nawigację za pomocą kropek podczas wczytywania
-            loadErrorClassName: "error", // Nazwa nadawana na slide oraz nawigację za pomocą kropek w przypadku kiedy slide się nie wczytał
-            loadedClassName: "loaded", // Nazwa nadawana na slide oraz nawigację za pomocą kropek w przypadku kiedy slide się wczytał
-            jsClassName: "js", // Nazwa nadawana na slider w celu wykrycia obsługiwania przez użytkownika JS
-            animation: "fade", // Jedna z nazw animacji zip|fade|chain|tape
-                  
-            prev: false, // Ciąg znaków wskazujący na element, który po kliknięciu będzie przełączał nam slider (#slider nav button.arrow-next), składnia CSS
-            next: false, // Ciąg znaków wskazujący na element, który po kliknięciu będzie przełączał nam slider (#slider nav button.arrow-prev), składnia CSS
-            auto: true, // Wskazuje czy slider ma się przełączać automatycznie
-            time: 1000, // Czas pomiędzy slidami
-            pause: true, // Wskazuje czy slider ma się zatrzymywać po najechaniu na aktywny slide
-                  
-            nav: false, // Ciąg znaków wskazujący na elementy, które po kliknięciu będą przełączały nam slider (#slider nav.dots span), składnia CSS, ilość elementów musi być tożsama z ilością slidów
-            parent: true, // Ciąg znaków wskazujący na element rodzica
-            height: true, // Wskazuje czy rodzic slidera ma zmieniać wysokość
-            load: false // Wskazuje czy zdjęcia mają być wczytywane za pomocą AJAX
-            }).init();
+            prev: "#slider nav button.arrow-prev",
+            next: "#slider nav button.arrow-next",
+            nav: "#slider nav.dots span",
+            time: 5000
+              }).init();
             })();
           </script>
   </body>    
