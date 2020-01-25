@@ -18,59 +18,77 @@
     <div id="slider" class="slides">
         <div class="slide">
           <figure>
-            <img class="hidden" src="dodatki.png" alt="Pierwszy slide">
+            <img class="hidden" src="et40.jpg" alt="Pierwszy slide">
           </figure>
           <div class="slide-description">
-            <h3 class="slide-header"><a href="dodatki.html">Kliknij by przejść!</a></h3>
+            <h3 class="slide-header"><a href="dodatki.html"><img src=""></a></h3>
             <p></p>
           </div>
         </div>
         <div class="slide">
           <figure>
-            <img class="hidden" src="uploads/images/blog/slide2.jpg" alt="Drugi slide">
+            <img class="hidden" src="HSLPL.jpg" alt="Drugi slide">
           </figure>
           <div class="slide-description">
-            <h3 class="slide-header">Animacje CSS3</h3>
-            <p>Dzięki zastosowaniu animacji CSS3 nawet początkujący programista stron internetowych, może bez trudu pisać własne animacje dla pojedynczych slidów.</p>
+            <h3 class="slide-header"></h3>
+            <p></p>
           </div>
         </div>
         <div class="slide">
           <figure>
-            <img class="hidden" src="uploads/images/blog/slide3.jpg" alt="Trzeci slide">
+            <img class="hidden" src="PCC.jpg" alt="Trzeci slide">
           </figure>
           <div class="slide-description">
-            <h3 class="slide-header">Zatrzymaj po najechaniu</h3>
-            <p>Dzięki opcji "pause" po najechaniu kursorem slide zatrzyma się, co pozwoli podziwiać zdjęcia bądź przeczytać tekst w nim zawarty.</p>
+            <h3 class="slide-header"></h3>
+            <p></p>
           </div>
         </div>
         <div class="slide">
           <figure>
-            <img class="hidden" src="uploads/images/blog/slide4.jpg" alt="Czwarty slide">
+            <img class="hidden" src="PKPC.jpg" alt="Czwarty slide">
           </figure>
           <div class="slide-description">
-            <h3 class="slide-header">Wywołaj slider w dowolnym momencie</h3>
-            <p>Konstrukcja slidera umożliwia uruchomienie rotacji zdjęć w dowolnym momencie, po wykonaniu akcji czy po wczytaniu się strony.</p>
+            <h3 class="slide-header"></h3>
+            <p></p>
           </div>
         </div>
         <div class="slide">
           <figure>
-            <img class="hidden" src="uploads/images/blog/slide5.jpg" alt="Piąty slide">
+            <img class="hidden" src="PKPIC1.jpg" alt="Piąty slide">
           </figure>
           <div class="slide-description">
-            <h3 class="slide-header">Mam już bibliotekę jQuery, nie chcę Comp!</h3>
-            <p>Jeżeli posiadasz już zainstalowaną bibliotekę jQuery, nie musisz pobierać i instalować biblioteki Comp. Slider został dostosowany do popularnej biblioteki jQuery.</p>
+            <h3 class="slide-header"></h3>
+            <p></p>
           </div>
         </div>
         <div class="slide">
           <figure>
-            <img class="hidden" src="uploads/images/blog/slide6.jpg" alt="Szósty slide">
+            <img class="hidden" src="PKPIC2.jpg" alt="Szósty slide">
           </figure>
           <div class="slide-description">
-            <h3 class="slide-header">Slider RWD</h3>
-            <p>Slider został dostosowany do urządzeń mobilnych.</p>
+            <h3 class="slide-header"></h3>
+            <p></p>
+          </div>
+        <div class="slide">
+          <figure>
+            <img class="hidden" src="dragon_cgunit.jpg" alt="Siódmy slide">
+          </figure>
+          <div class="slide-description">
+            <h3 class="slide-header"></h3>
+            <p></p>
+          </div>
+        <div class="slide">
+          <figure>
+            <img class="hidden" src="traxxs.jpg" alt="Ósmy slide">
+          </figure>
+          <div class="slide-description">
+            <h3 class="slide-header"></h3>
+            <p></p>
           </div>
         </div>
         <nav role="pagination" class="dots">
+          <span class="dot"></span>
+          <span class="dot"></span>
           <span class="dot"></span>
           <span class="dot"></span>
           <span class="dot"></span>
@@ -84,20 +102,43 @@
         <nav role="pagination" class="arrows">
           <button class="arrow-next">❯</button>
         </nav>
-      </div>    
-    <script src="comp.js"></script>
-      <script src="slider.js"></script>
-        <script>
-          (function () {
+      </div>
+  <script src="comp.js"></script>
+        <script src="slider.js"></script>
+          <script>
+            (function () {
             new Slider("#slider .slide").options({
-            prev: "#slider nav button.arrow-prev",
-            next: "#slider nav button.arrow-next",
-            nav: "#slider nav.dots span"
+            first: 0, // Pozycja od której rozpocznie się slider
+
+            activeClassName: "active", // Nazwa klasy aktywnego slidu
+            prevClassName: "prev", // Nazwa klasy slidu który był poprzednio aktywny (pomocne przy animacjach CSS)
+            firstClassName: "first", // Nazwa nadawany na pierwszy (first: 0) slide podczas pierwszego uruchomienia
+            loadingClassName: "loading", // Nazwa nadawana na slide oraz nawigację za pomocą kropek podczas wczytywania
+            loadErrorClassName: "error", // Nazwa nadawana na slide oraz nawigację za pomocą kropek w przypadku kiedy slide się nie wczytał
+            loadedClassName: "loaded", // Nazwa nadawana na slide oraz nawigację za pomocą kropek w przypadku kiedy slide się wczytał
+            jsClassName: "js", // Nazwa nadawana na slider w celu wykrycia obsługiwania przez użytkownika JS
+            animation: "zip", // Jedna z nazw animacji zip|fade|chain|tape
+                  
+            prev: false, // Ciąg znaków wskazujący na element, który po kliknięciu będzie przełączał nam slider (#slider nav button.arrow-next), składnia CSS
+            next: false, // Ciąg znaków wskazujący na element, który po kliknięciu będzie przełączał nam slider (#slider nav button.arrow-prev), składnia CSS
+            auto: true, // Wskazuje czy slider ma się przełączać automatycznie
+            time: 5000, // Czas pomiędzy slidami
+            pause: true, // Wskazuje czy slider ma się zatrzymywać po najechaniu na aktywny slide
+                  
+            nav: false, // Ciąg znaków wskazujący na elementy, które po kliknięciu będą przełączały nam slider (#slider nav.dots span), składnia CSS, ilość elementów musi być tożsama z ilością slidów
+            parent: true, // Ciąg znaków wskazujący na element rodzica
+            height: true, // Wskazuje czy rodzic slidera ma zmieniać wysokość
+            load: true // Wskazuje czy zdjęcia mają być wczytywane za pomocą AJAX
             }).init();
             })();
-</script>
-</body>    
+          </script>
+  </body>    
 </html>
+      
+    
+        
+        
+        
         
     
 

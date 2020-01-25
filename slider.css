@@ -55,11 +55,12 @@
   
   .slide-description {
     align-self: flex-end;
-    padding: 64px 64px 64px 136px;
+    padding: 64px 64px 0px 100px;
     position: relative;
     transition: opacity 0.4s;
     max-width: 612px;
     z-index: 0;
+    opacity: 30%;
   }
   
   .slide-header {

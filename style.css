@@ -1,6 +1,7 @@
 body {
     background-color: rgb(243, 8, 8);
-}
+    margin: 0px;
+}    
 
 header {
     padding: 25px;
@@ -11,3 +12,4 @@ footer {
     margin: 0px;
     background-color: blanchedalmond;
 }
+
