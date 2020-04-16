@@ -18,7 +18,7 @@ class Slider {
         prev: false,
         next: false,
         auto: true,
-        time: 5000,
+        time: 1000,
         pause: true,
   
         nav: false,
